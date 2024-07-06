@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package weather;
 
 /**
@@ -9,8 +5,8 @@ package weather;
  * @author phang
  */
 public class WeatherResponse {
-    
-   private Location location;
+
+    private Location location;
     private Current current;
 
     public Location getLocation() {
