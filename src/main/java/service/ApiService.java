@@ -20,12 +20,12 @@ public class ApiService {
     @Value("e5936e4175a8469db3726831d9ec961b") // Load from application.properties or environment variable
     private String apiKeyGeoLocation;
 
-    @Value("17fbaebe597dd99d0baeeee1ede10b93") // Load from application.properties or environment variable
+    @Value("7ca544b95dd848dfb1581153240707") // Load from application.properties or environment variable
     private String apiKeyWeather;
 
     // API URLs with placeholders for parameters
-    private static final String GEO_LOCATION_URL_TEMPLATE = "https://ipgeolocation.abstractapi.com/v1/?api_key={apiKey}&ip_address={ipAddress}";
-    private static final String WEATHER_URL_TEMPLATE = "https://api.weatherapi.com/v1/current.json?key={apiKey}&q={lat},{lon}&aqi=no";
+    private static final String GEO_LOCATION_URL_TEMPLATE = "https://ipgeolocation.abstractapi.com/v1/?api_key=e5936e4175a8469db3726831d9ec961b&ip_address=105.224.59.18";
+    private static final String WEATHER_URL_TEMPLATE = "https://api.weatherapi.com/v1/current.json?key=7ca544b95dd848dfb1581153240707&q=-25.7599,28.2604&aqi=no";
 
     /**
      * Calls the geolocation API to get latitude and longitude based on IP address.
