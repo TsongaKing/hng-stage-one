@@ -13,7 +13,7 @@ import weather.WeatherResponse;
 
 @RestController
 public class ApiEndpoint {
-    
+
     @Autowired
     private ApiService apiService;
 
@@ -26,13 +26,8 @@ public class ApiEndpoint {
     public ApiResponseModel helloEndpoint(@RequestParam String visitor_name,
                                           @RequestHeader(value = "X-Forwarded-For", required = false) String xForwardedFor,
                                           HttpServletRequest request) {
-        // Get the IP address of the client
-        String ipAddress = "";
-        if (xForwardedFor != null && !xForwardedFor.isEmpty()) {
-            ipAddress = xForwardedFor.split(",")[0];
-        } else {
-            ipAddress = request.getRemoteAddr();
-        }
+        // Get the IP address of the client using the utility method
+        String ipAddress = getClientIp(request, xForwardedFor);
 
         // Get the geolocation information based on the IP address
         GeoLocationResponse geoLocationResponse = apiService.getGeoLocation(ipAddress);
@@ -71,5 +66,20 @@ public class ApiEndpoint {
 
         // Return the JSON response
         return new ApiResponseModel(ipAddress, city, greeting);
+    }
+
+    // Utility method to get client IP address and convert IPv6 loopback to IPv4
+    private String getClientIp(HttpServletRequest request, String xForwardedFor) {
+        String ipAddress = "";
+        if (xForwardedFor != null && !xForwardedFor.isEmpty()) {
+            ipAddress = xForwardedFor.split(",")[0];
+        } else {
+            ipAddress = request.getRemoteAddr();
+        }
+        // Convert IPv6 loopback address to IPv4
+        if ("0:0:0:0:0:0:0:1".equals(ipAddress)) {
+            ipAddress = "127.0.0.1";
+        }
+        return ipAddress;
     }
 }
